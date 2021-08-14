@@ -55,21 +55,6 @@
                     title: "事件展示",
                 },
                 {
-                    icon: "el-icon-s-unfold",
-                    index: "1",
-                    title: "信息一览",
-                    subs: [
-                        {
-                            index: "/projects_list",
-                            title: "项目列表",
-                        },
-                        {
-                            index: "/events_list",
-                            title: "事件列表",
-                        },
-                    ],
-                },
-                {
                     icon: "el-icon-s-tools",
                     index: "2",
                     title: "配置中心",

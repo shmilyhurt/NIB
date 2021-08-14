@@ -118,3 +118,36 @@ export function post (url, params) {
       })
   })
 }
+
+/**
+ * delete
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+ export function del (url, params) {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, params).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err.data)
+    })
+  })
+}
+
+
+/**
+ * patch
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+ export function patch (url, params) {
+  return new Promise((resolve, reject) => {
+    axios.patch(url, params)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
