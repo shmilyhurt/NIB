@@ -31,14 +31,14 @@ const routes = [
                     "../views/UsersList.vue")
             },
             {
-                path: "/projects_list",
-                name: "projectsList",
+                path: "/projects",
+                name: "projects",
                 meta: {
                     title: '项目信息'
                 },
                 component: () => import(
                     /* webpackChunkName: "projectMessages" */
-                    "../views/ProjectsList.vue")
+                    "../views/Projects.vue")
             },
             {
                 path: "/events_list",

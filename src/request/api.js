@@ -15,8 +15,15 @@ export const usersAdd = (data)  => post('/user/create',data)
 
 
 // projects
-export const projectsList = ()  => get('/project/projects')
+export const projects = (params)  => get('/project/projects',{params})
+export const delPro = (params)  => del('/project/delete',{params})
 
 // events
-
 export const eventsList = ()  => get('/event/events')
+
+
+// plans
+export const plansList = (params)  => get('/plan/plans',{params})
+export const addPlan = (data)  => post('/plan/create',data)
+export const delPlan = (params)  => del('/plan/delete',{params})
+export const patchPlan = (id, data)  => patch('/plan/patch?id='+ id, data)
