@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'debug') {
   axios.defaults.baseURL = 'http://127.0.0.1:8880'
 } else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'http://127.0.0.1:8880'
+  axios.defaults.baseURL = 'http://39.106.0.163:8880'
 }
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8;multipart/form-data'

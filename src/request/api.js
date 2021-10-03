@@ -1,9 +1,5 @@
 import { get, post, del, patch } from './http'
 
-export const api1 = p1 => get('https://xxx/v5/weather?city=qingdao&key=1b47b16e4aa545eaa55a66f859ac0089', p1)
-export const api2 = p2 => get('https://xxx/v5/weather?city=taian&key=1b47b16e4aa545eaa55a66f859ac0089', p2)
-export const api3 = p => post('https://xxx/svserver/upload/', p)
-
 // Login
 export const Login =  p => post('/login', p)
 
@@ -15,8 +11,11 @@ export const usersAdd = (data)  => post('/user/create',data)
 
 
 // projects
+export const pros = ()  => get('/project/pros')
+export const addPro = (data)  => post('/project/create',data)
+export const patchPro = (id, data)  => patch('/project/patch?id='+ id, data)
 export const projects = (params)  => get('/project/projects',{params})
-export const delPro = (params)  => del('/project/delete',{params})
+export const delPro = (params)  => del('/project/delete?ids='+ params)
 
 // events
 export const eventsList = ()  => get('/event/events')
