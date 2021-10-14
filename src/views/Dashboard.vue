@@ -1,86 +1,88 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="8">
-      <el-card shadow="hover"
-               class="mgb20"
-               style="height:100px;padding: 0">
-        <div class="user-info">
-          <img src="../assets/img/img.jpg"
-               class="user-avator"
-               alt />
-          <div class="user-info-cont">
-            <div class="user-info-name">{{ name }}</div>
-            <div>{{ role }}</div>
+  <div>
+    <el-row :gutter="20">
+      <el-col :span="8">
+        <el-card shadow="hover"
+                 class="mgb20"
+                 style="height:100px;padding: 0">
+          <div class="user-info">
+            <img src="../assets/img/img.jpg"
+                 class="user-avator"
+                 alt />
+            <div class="user-info-cont">
+              <div class="user-info-name">{{ name }}</div>
+              <div>{{ role }}</div>
+            </div>
           </div>
-        </div>
-      </el-card>
-    </el-col>
-    <el-col :span="16">
-      <el-row :gutter="20"
-              class="mgb20">
-        <el-col :span="8">
-          <el-card shadow="hover"
-                   :body-style="{ padding: '0px' }">
-            <div class="grid-content grid-con-1">
-              <i class="el-icon-user-solid grid-con-icon"></i>
-              <div class="grid-cont-right">
-                <div class="grid-num">
-                  <count-to :startVal='0'
-                            :endVal='2017'
-                            :duration=4000></count-to>
+        </el-card>
+      </el-col>
+      <el-col :span="16">
+        <el-row :gutter="20"
+                class="mgb20">
+          <el-col :span="8">
+            <el-card shadow="hover"
+                     :body-style="{ padding: '0px' }">
+              <div class="grid-content grid-con-1">
+                <i class="el-icon-user-solid grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">
+                    <count-to :startVal='0'
+                              :endVal='2017'
+                              :duration=4000></count-to>
+                  </div>
+                  <div>用户访问量</div>
                 </div>
-                <div>用户访问量</div>
               </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card shadow="hover"
-                   :body-style="{ padding: '0px' }">
-            <div class="grid-content grid-con-2">
-              <i class="el-icon-message-solid grid-con-icon"></i>
-              <div class="grid-cont-right">
-                <div class="grid-num">
-                  <count-to :startVal='0'
-                            :endVal='321'
-                            :duration=4000></count-to>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card shadow="hover"
+                     :body-style="{ padding: '0px' }">
+              <div class="grid-content grid-con-2">
+                <i class="el-icon-message-solid grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">
+                    <count-to :startVal='0'
+                              :endVal='321'
+                              :duration=4000></count-to>
+                  </div>
+                  <div>系统消息</div>
                 </div>
-                <div>系统消息</div>
               </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card shadow="hover"
-                   :body-style="{ padding: '0px' }">
-            <div class="grid-content grid-con-3">
-              <i class="el-icon-s-goods grid-con-icon"></i>
-              <div class="grid-cont-right">
-                <div class="grid-num">
-                  <count-to :startVal='0'
-                            :endVal='5000'
-                            :duration=4000></count-to>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card shadow="hover"
+                     :body-style="{ padding: '0px' }">
+              <div class="grid-content grid-con-3">
+                <i class="el-icon-s-goods grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">
+                    <count-to :startVal='0'
+                              :endVal='5000'
+                              :duration=4000></count-to>
+                  </div>
+                  <div>关联事件</div>
                 </div>
-                <div>关联事件</div>
               </div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </el-col>
-  </el-row>
-  <el-row>
-    <el-col :span="11">
-      <v-chart class="chart"
-               :option="option" />
-    </el-col>
-    <el-col :span="1"></el-col>
-    <el-col :span="11">
-      <v-chart class="chart"
-               :option="option2" />
-    </el-col>
-  </el-row>
-  <MyCallendar></MyCallendar>
+            </el-card>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="11">
+        <v-chart class="chart"
+                 :option="option" />
+      </el-col>
+      <el-col :span="1"></el-col>
+      <el-col :span="11">
+        <v-chart class="chart"
+                 :option="option2" />
+      </el-col>
+    </el-row>
+    <MyCallendar></MyCallendar>
+  </div>
 </template>
 
 <script>

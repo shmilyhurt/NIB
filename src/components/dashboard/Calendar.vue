@@ -70,6 +70,7 @@ export default {
         events: [],
         eventColor: '#378006',
         dayMaxEventRows: true,
+        displayEventTime: false,
         eventDidMount: this.eventMount
       },
       form: {
@@ -133,6 +134,7 @@ export default {
         start: this.form.date[0],
         end: this.form.date[1]
       }
+      console.log(data)
       addPlan(data).then(
         res => {
           this.calendarOptions.events.push({

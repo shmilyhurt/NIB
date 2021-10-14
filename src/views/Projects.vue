@@ -1,79 +1,82 @@
 <template>
-  <div style="height: 100%">
-    <div style="    margin-bottom: 8px;">
-      <el-button type="success"
-                 @click="dialogFormVisible = true">新增</el-button>
-      <el-button type="danger"
-                 v-if="showDeleteButton"
-                 @click="delPro">删除</el-button>
-    </div>
+  <div style="height:100%">
+    <div style="height: 97%">
+      <div style="margin-bottom: 8px;">
+        <el-button type="success"
+                   @click="dialogFormVisible = true">新增</el-button>
+        <el-button type="danger"
+                   v-if="showDeleteButton"
+                   @click="delPro">删除</el-button>
+      </div>
 
-    <div style="height: 100%; box-sizing: border-box;">
-      <ag-grid-vue style="width: 100%; height: 100%;"
-                   class="ag-theme-alpine"
-                   :context="context"
-                   :columnDefs="columnDefs"
-                   :rowData="rowData"
-                   :rowHeight="rowHeight"
-                   :rowClassRules="rowClassRules"
-                   :rowSelection="rowSelection"
-                   @grid-ready="onGridReady"
-                   :defaultColDef="defaultColDef"
-                   :columnTypes="columnTypes"
-                   :animateRows="true"
-                   :paginationAutoPageSize="true"
-                   :pagination="true"
-                   @cell-value-changed="onCellValueChanged"
-                   @selection-changed="onSelectionChanged">
-      </ag-grid-vue>
+      <div style="height: 100%; box-sizing: border-box;">
+        <ag-grid-vue style="width: 100%; height: 100%;"
+                     class="ag-theme-alpine"
+                     :context="context"
+                     :columnDefs="columnDefs"
+                     :rowData="rowData"
+                     :rowHeight="rowHeight"
+                     :rowClassRules="rowClassRules"
+                     :rowSelection="rowSelection"
+                     @grid-ready="onGridReady"
+                     :defaultColDef="defaultColDef"
+                     :columnTypes="columnTypes"
+                     :animateRows="true"
+                     :paginationAutoPageSize="true"
+                     :pagination="true"
+                     @cell-value-changed="onCellValueChanged"
+                     @selection-changed="onSelectionChanged">
+        </ag-grid-vue>
+      </div>
+    </div>
+    <div>
+      <el-dialog title="添加项目"
+                 v-model="dialogFormVisible"
+                 width="800px">
+        <el-form :model="form">
+          <el-form-item label="名称"
+                        :label-width="formLabelWidth">
+            <el-input v-model="form.name"
+                      autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="类型"
+                        :label-width="formLabelWidth">
+            <el-select v-model="form.type"
+                       aria-checked="S">
+              <el-option label="Samll"
+                         value="S"></el-option>
+              <el-option label="Medium"
+                         value="M"></el-option>
+              <el-option label="Large"
+                         value="L"></el-option>
+              <el-option label="Danger"
+                         value="D"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="状态"
+                        :label-width="formLabelWidth">
+            <el-select v-model="form.status">
+              <el-option label="New"
+                         value="N"></el-option>
+              <el-option label="Process"
+                         value="P"></el-option>
+              <el-option label="End"
+                         value="E"></el-option>
+              <el-option label="Stop"
+                         value="S"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary"
+                       @click="submitAdd">确 定</el-button>
+          </span>
+        </template>
+      </el-dialog>
     </div>
   </div>
-
-  <el-dialog title="添加项目"
-             v-model="dialogFormVisible"
-             width="800px">
-    <el-form :model="form">
-      <el-form-item label="名称"
-                    :label-width="formLabelWidth">
-        <el-input v-model="form.name"
-                  autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="类型"
-                    :label-width="formLabelWidth">
-        <el-select v-model="form.type"
-                   aria-checked="S">
-          <el-option label="Samll"
-                     value="S"></el-option>
-          <el-option label="Medium"
-                     value="M"></el-option>
-          <el-option label="Large"
-                     value="L"></el-option>
-          <el-option label="Danger"
-                     value="D"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="状态"
-                    :label-width="formLabelWidth">
-        <el-select v-model="form.status">
-          <el-option label="New"
-                     value="N"></el-option>
-          <el-option label="Process"
-                     value="P"></el-option>
-          <el-option label="End"
-                     value="E"></el-option>
-          <el-option label="Stop"
-                     value="S"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary"
-                   @click="submitAdd">确 定</el-button>
-      </span>
-    </template>
-  </el-dialog>
 </template>
 
 <script>
