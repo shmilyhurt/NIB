@@ -27,10 +27,10 @@
                 <div class="grid-cont-right">
                   <div class="grid-num">
                     <count-to :startVal='0'
-                              :endVal='2017'
+                              :endVal='userCount'
                               :duration=4000></count-to>
                   </div>
-                  <div>用户访问量</div>
+                  <div>注册人数</div>
                 </div>
               </div>
             </el-card>
@@ -39,14 +39,14 @@
             <el-card shadow="hover"
                      :body-style="{ padding: '0px' }">
               <div class="grid-content grid-con-2">
-                <i class="el-icon-message-solid grid-con-icon"></i>
+                <i class="el-icon-postcard grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <div class="grid-num">
                     <count-to :startVal='0'
-                              :endVal='321'
+                              :endVal='proCount'
                               :duration=4000></count-to>
                   </div>
-                  <div>系统消息</div>
+                  <div>所有项目</div>
                 </div>
               </div>
             </el-card>
@@ -55,14 +55,14 @@
             <el-card shadow="hover"
                      :body-style="{ padding: '0px' }">
               <div class="grid-content grid-con-3">
-                <i class="el-icon-s-goods grid-con-icon"></i>
+                <i class="el-icon-tickets grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <div class="grid-num">
                     <count-to :startVal='0'
-                              :endVal='5000'
+                              :endVal='planCount'
                               :duration=4000></count-to>
                   </div>
-                  <div>关联事件</div>
+                  <div>所有计划</div>
                 </div>
               </div>
             </el-card>
@@ -98,8 +98,13 @@ import {
   LegendComponent
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import MyCallendar from '@/components/dashboard/Calendar'
+import {
+  dashProStatus,
+  dashProType,
+  dashAll
+} from '../request/api'
 
 
 use([
@@ -124,148 +129,147 @@ export default defineComponent({
   },
   data () {
     return {
+      userCount: 0,
+      proCount: 0,
+      planCount: 0,
+      option: {},
+      option2: {},
       name: localStorage.getItem("ms_username"),
       role: "系统管理员",
     }
   },
-  setup () {
-    const option = ref({
-      title: {
-        text: "Traffic Sources",
-        left: "center"
-      },
-      tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-      },
-      legend: {
-        orient: "vertical",
-        left: "left",
-        data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"]
-      },
-      series: [
-        {
-          name: "Traffic Sources",
-          type: "pie",
-          radius: "55%",
-          center: ["50%", "60%"],
-          data: [
-            { value: 335, name: "Direct" },
-            { value: 310, name: "Email" },
-            { value: 234, name: "Ad Networks" },
-            { value: 135, name: "Video Ads" },
-            { value: 1548, name: "Search Engines" }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
+  mounted () {
+    dashProStatus().then(res => {
+      this.option = {
+        title: {
+          text: "Project Status For Day",
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+          data: ["New", "Process", "Stop", "End", "Complete"]
+        },
+        series: [
+          {
+            name: "Project Status For Day",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+              { value: res.data.OneStatus, name: "New" },
+              { value: res.data.TwoStatus, name: "Process" },
+              { value: res.data.ThrStatus, name: "Stop" },
+              { value: res.data.FouStatus, name: "End" },
+              { value: res.data.FivStatus, name: "Complete" }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              }
             }
           }
-        }
-      ]
-    }
+        ]
+      };
+    })
 
-    );
-    const option2 = {
-      title: {
-        text: '堆叠区域图'
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'cross',
-          label: {
-            backgroundColor: '#6a7985'
+    dashProType().then(res => {
+      this.option2 = {
+        title: {
+          text: 'Type For Day'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
           }
-        }
-      },
-      legend: {
-        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-      ],
-      yAxis: [
-        {
-          type: 'value'
-        }
-      ],
-      series: [
-        {
-          name: '邮件营销',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [120, 132, 101, 134, 90, 230, 210]
         },
-        {
-          name: '联盟广告',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [220, 182, 191, 234, 290, 330, 310]
+        legend: {
+          data: ['Small', 'Large', 'Median', 'Danger']
         },
-        {
-          name: '视频广告',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [150, 232, 201, 154, 190, 330, 410]
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
         },
-        {
-          name: '直接访问',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [320, 332, 301, 334, 390, 330, 320]
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
         },
-        {
-          name: '搜索引擎',
-          type: 'line',
-          stack: '总量',
-          label: {
-            show: true,
-            position: 'top'
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: 'Small',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: res.data[0]
           },
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
+          {
+            name: 'Large',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: res.data[1]
           },
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
-    };
+          {
+            name: 'Median',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: res.data[2]
+          },
+          {
+            name: 'Danger',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: res.data[3]
+          },
+        ]
+      }
 
-    return { option, option2 };
+    })
+
+    dashAll().then(res => {
+      this.userCount = res.data.UserCount
+      this.proCount = res.data.ProCount
+      this.planCount = res.data.PlanCount
+    })
   },
   methods: {
 

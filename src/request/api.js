@@ -26,3 +26,8 @@ export const plansList = (params)  => get('/plan/plans',{params})
 export const addPlan = (data)  => post('/plan/create',data)
 export const delPlan = (params)  => del('/plan/delete',{params})
 export const patchPlan = (id, data)  => patch('/plan/patch?id='+ id, data)
+
+// dash
+export const dashAll = ()  => get('/dash/all')
+export const dashProStatus = ()  => get('/dash/pro_status')
+export const dashProType = ()  => get('/dash/pro_type')

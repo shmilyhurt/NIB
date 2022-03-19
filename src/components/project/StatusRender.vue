@@ -9,7 +9,7 @@
 <script>
 export default {
   data () {
-    let progress = { "N": 20, "P": 40, "E": 100, "S": 50 }
+    let progress = { "N": 20, "P": 40, "E": 90, "S": 50, "C": 100 }
     let status_dict = { "N": "warning", "P": "success", "E": "", "S": "exception" }
     return {
       percent: progress[this.params.value],

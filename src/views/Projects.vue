@@ -64,6 +64,8 @@
                          value="E"></el-option>
               <el-option label="Stop"
                          value="S"></el-option>
+              <el-option label="Com"
+                         value="C"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -239,7 +241,8 @@ export default {
           "20": "N",
           "40": "P",
           "50": "S",
-          "100": "E"
+          "90": "E",
+          "100": "C"
         }
         patchPro(params.data.id, {
           "status": status_dict[params.newValue]
